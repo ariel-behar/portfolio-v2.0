@@ -7,7 +7,6 @@ var autoprefixer = require('gulp-autoprefixer');
 var cleancss = require('gulp-clean-css');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
-babelify = require('babelify');
 
 //Directory variables
 var publicCSS = 'public/css';

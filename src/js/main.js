@@ -54,9 +54,26 @@ $(document).ready(() => {
     });
 });
 
+//Footer
 const footerDate = document.getElementById('footer-date');
 const year = new Date().getFullYear();
 footerDate.innerHTML = year;
+// End Footer
+
+//Abilities
+
+
+let abilities = [['HTML', 'green', 'html.png'], ['CSS', 'green', 'css.png'], ['Sass', 'green', 'sass.png'], ['Bootstrap', 'green', 'bootstrap.jpg'], ['MDBootstrap', 'green', 'mdbootstrap.jpg'], ['Javascript', 'green', 'js.png'], ['jQuery', 'green', 'jquery.png'], ['JSON', 'green', 'json.jpg'], ['Wordpress', 'green', 'wordpress.png'], ['Gulp.js', 'green', 'gulp.png'], ['Git', 'green', 'git.png'], ['Photoshop', 'green', 'photoshop.png'], ['Premiere', 'yellow', 'premiere.png'], ['Illustrator', 'yellow', 'illustrator-circle.png'], ['Node.js', 'blue', 'node.png'], ['Express', 'blue', 'express.png'], ['MongoDB', 'blue', 'mongodb.png']]
+
+const abilitiesDiv = document.getElementById('abilities');
+
+abilities.reverse().forEach(item => {
+    let content = `<div class="chip z-depth-5 ${item[1]} darken-2">
+                            <img src ="img/downloaded/icons/${item[2]}" alt="${item[0]} logo" > ${item[0]}
+					    </div>`;
+    abilitiesDiv.insertAdjacentHTML('afterbegin', content);
+})
+
 
 //PROJECTS
 function Project(number, name, description, myRole, techUsed, launchDate, domain, remarks) {
