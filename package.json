@@ -1,0 +1,41 @@
+{
+    "name": "ariel-portfolio",
+    "version": "1.0.0",
+    "description": "An updated and upgraded version of my portfolio with integration of Node and Express",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon -e js,hbs --ignore public"
+    },
+    "keywords": [
+        "Ariel Behar",
+        "Front-End",
+        "Web Developer",
+        "Ariel Behar Web Developer",
+        "Web Design",
+        "Frontend Web Developer"
+    ],
+    "author": "Ariel Behar",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "hbs": "^4.1.1"
+    },
+    "devDependencies": {
+        "connect-livereload": "^0.6.1",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-jshint": "^2.1.0",
+        "gulp-livereload": "^4.0.2",
+        "gulp-minify-css": "^1.2.4",
+        "gulp-sass": "^4.1.0",
+        "gulp-terser": "^1.2.0",
+        "jshint": "^2.11.1",
+        "jshint-stylish": "^2.2.1",
+        "livereload": "^0.9.1",
+        "nodemon": "^2.0.4"
+    }
+}
