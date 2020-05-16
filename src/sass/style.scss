@@ -319,6 +319,8 @@ main {
             ol {
                 text-align: center;
                 margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
                 li {
                     width: 23%;
                     opacity: 0.7;
@@ -326,13 +328,6 @@ main {
                     &.active {
                         transform: scale(1.1);
                         opacity: 1;
-                    }
-                }
-            }
-            #first-list-thumbnails {
-                li {
-                    &:first-child {
-                        display: none;
                     }
                 }
             }

@@ -54,11 +54,21 @@ $(document).ready(() => {
     });
 });
 
-//Footer
-const footerDate = document.getElementById('footer-date');
-const year = new Date().getFullYear();
-footerDate.innerHTML = year;
-// End Footer
+//Languages
+let languages = [['English', 'American flag', 'usa.png', '5 / 5 / 5 / 5'], ['Spanish', 'Spanish flag', 'spain.png', '4 / 4 / 5 / 5'], ['Bulgarian', 'Bulgarian flag', 'bulgaria.png', 'Native'], ['Hebrew', 'Israeli flag', 'israel.png', '5 / 5 / 5 / 5'], ['French', 'French flag', 'france.png', '2 / 2 / 3 / 3'], ['Russian', 'Russian flag', 'russia.png', '2 / 1 / 3 / 3']];
+
+const languagesDiv = document.getElementById('languages');
+
+languages.forEach(item => {
+    let content = `<div class="col-4 col-sm-2 pb-1 text-center">
+                        ${item[0]}
+                        <img src="img/downloaded/flags/${item[2]}" alt="${item[1]}" class="img-fluid mx-auto">
+                        <span class="text-muted">${item[3]}</span>
+                    </div>`;
+    languagesDiv.insertAdjacentHTML('beforeend', content);
+})
+// End of Languages
+
 
 //Abilities
 let abilities = [['HTML', 'green', 'html.png'], ['CSS', 'green', 'css.png'], ['Sass', 'green', 'sass.png'], ['Bootstrap', 'green', 'bootstrap.jpg'], ['MDBootstrap', 'green', 'mdbootstrap.jpg'], ['Javascript', 'green', 'js.png'], ['jQuery', 'green', 'jquery.png'], ['JSON', 'green', 'json.jpg'], ['Wordpress', 'green', 'wordpress.png'], ['Gulp.js', 'green', 'gulp.png'], ['Git', 'green', 'git.png'], ['Photoshop', 'green', 'photoshop.png'], ['Premiere', 'yellow', 'premiere.png'], ['Illustrator', 'yellow', 'illustrator-circle.png'], ['Node.js', 'blue', 'node.png'], ['Express', 'blue', 'express.png'], ['MongoDB', 'blue', 'mongodb.png']]
@@ -71,11 +81,14 @@ abilities.reverse().forEach(item => {
 					    </div>`;
     abilitiesDiv.insertAdjacentHTML('afterbegin', content);
 })
+//End of Abilities
+
 
 //PROJECTS
-function Project(number, name, description, myRole, techUsed, launchDate, domain, remarks) {
+function Project(number, name, projectImage, description, myRole, techUsed, launchDate, domain, remarks) {
     this.number = number;
     this.name = name;
+    this.projectImage = projectImage;
     this.description = description;
     this.myRole = myRole;
     this.techUsed = techUsed;
@@ -87,21 +100,20 @@ function Project(number, name, description, myRole, techUsed, launchDate, domain
 Project.prototype = {
     constructor: Project,
     descriptionTitle: 'Project Description:',
-    createSection: function () {
-        const listItem = document.querySelectorAll(`li[data-slide-to='${this.number}'`);
+    displaySection: function () {
+        const listItem = document.querySelector(`li[data-slide-to='${this.number + 1}'`);
         const projectContent = document.getElementById('project-content');
 
-        listItem.forEach(item => {
-            item.addEventListener('click', () => {
-                setTimeout(() => {
-                    projectContent.style.opacity = 0;
-                    projectContent.classList.remove('flex-center');
-                    projectContent.style.height = 'auto';
-                    projectContent.textContent = '';
-                }, 300);
+        listItem.addEventListener('click', () => {
+            setTimeout(() => {
+                projectContent.style.opacity = 0;
+                projectContent.classList.remove('flex-center');
+                projectContent.style.height = 'auto';
+                projectContent.textContent = '';
+            }, 300);
 
-                setTimeout(() => {
-                    projectContent.innerHTML = `<h4 class='text-center mb-2'><b>${this.name}</b></h4>
+            setTimeout(() => {
+                projectContent.innerHTML = `<h4 class='text-center mb-2'><b>${this.name}</b></h4>
                 <h5 class='text-left mb-1'>Project Description:</h5>
                 <p class='mb-1'>${this.description}${this.remarks}</p>
                 <h5 class='text-left mb-1'>My Role in the Project:</h5>
@@ -111,21 +123,88 @@ Project.prototype = {
                 <h5 class='text-left mb-1'>Project Launched in: <span class='text-success'>${this.launchDate}</span></h5>
                 <h5 class='text-left mb-1'>Visit site: <a href='${this.domain}' target='_blank'>${this.name}</a></h5>`;
 
-                    this.techUsed.forEach(e => {
-                        document.getElementById('techs-used').innerHTML += '<li class="list-inline-item">•' + e + '</li>';
-                    });
+                this.techUsed.forEach(e => {
+                    document.getElementById('techs-used').innerHTML += '<li class="list-inline-item">•' + e + '</li>';
+                });
 
-                    projectContent.style.opacity = 1;
-                }, 500);
-            });
+                projectContent.style.opacity = 1;
+            }, 500);
         });
     },
+    createSlide: function () {
+        let thumbnailTemplate = `<div class="carousel-item">
+                                <a href="${this.domain} target="_blank" class="mx-auto">
+                                    <img class="img-fluid d-block mx-auto"
+                                        src="img/downloaded/slides/${this.projectImage}" alt="Slide Number: ${this.number}">
+                                </a>
+                            </div>`
+        let carouselThumb = document.querySelector('#carousel-thumb .carousel-inner');
+
+
+        carouselThumb.insertAdjacentHTML('beforeend', thumbnailTemplate);
+    },
+    createCarouselThumb: function () {
+        let carouselFourThumbs = document.getElementById('thumbnails-carousel-4-thumbs');
+
+        let projectTemplate = `<li data-target="#carousel-thumb" data-slide-to="${this.number + 1}"
+                            class="active list-inline-item">
+                            <img class="d-block w-100"
+                                src="img/downloaded/slides/${this.projectImage}" class="img-fluid">
+                            </li>`
+
+        let carouselInnerTemplate = `<div class="carousel-inner" role="listbox"></div>`;
+
+        if (carouselFourThumbs) {
+            let projectCounter = this.number;
+            let carouselItemSlideFunc = function () {
+                let result = projectCounter / 4;
+                return result;
+            };
+            let carouselItemSlide = carouselItemSlideFunc();
+
+            let carouselItemTemplate = `<div class="carousel-item">
+                                        <div class="col-12 px-0 px-sm-1">
+                                            <ol class="list-inline px-2 px-sm-0" id="thumbs-4-slide-${Math.floor(carouselItemSlide)}"></ol>
+                                        </div>
+                                    </div>`;
+            if (carouselItemSlide == 0) {
+                carouselFourThumbs.insertAdjacentHTML('afterbegin', carouselInnerTemplate);
+                document.querySelector(`#thumbnails-carousel-4-thumbs .carousel-inner`).insertAdjacentHTML('beforeend', carouselItemTemplate);
+                document.querySelector(`#thumbnails-carousel-4-thumbs .carousel-inner .carousel-item`).classList.add('active');
+
+                document.querySelector(`#thumbnails-carousel-4-thumbs .carousel-inner .carousel-item div ol#thumbs-4-slide-${Math.floor(carouselItemSlide).toFixed(0)}`).insertAdjacentHTML('beforeend', `<li data-target="#carousel-thumb" data-slide-to='0' class="list-inline-item d-none"></li>`)
+
+                if (projectCounter % 4 == 0) {
+                    insertProject(4, carouselItemSlide);
+                } else {
+                    insertProject(4, carouselItemSlide);
+                }
+            } else {
+                if (projectCounter % 4 == 0) {
+                    createNewSlide(4, carouselItemTemplate);
+                    insertProject(4, carouselItemSlide);
+
+                } else {
+                    insertProject(4, Math.floor(carouselItemSlide).toFixed(0));
+
+                }
+            }
+        }
+
+        function createNewSlide(num, carouselItemTemplate) {
+            document.querySelector(`#thumbnails-carousel-${num}-thumbs .carousel-inner`).insertAdjacentHTML('beforeend', carouselItemTemplate);
+        }
+        function insertProject(num, carouselItemSlide) {
+            document.querySelector(`#thumbnails-carousel-${num}-thumbs .carousel-inner .carousel-item div ol#thumbs-4-slide-${Math.floor(carouselItemSlide).toFixed(0)}`).insertAdjacentHTML('beforeend', projectTemplate)
+        }
+    }
 };
 
 //A&M GameHub
 let amGameHub = new Project(
-    1,
+    0,
     'A&M GameHub',
+    'am-gamehub.jpg',
     'A desktop based web application to assist my little sisters learn English, European geography and Hebrew.',
     'I am the sole designer and developer of this project from conceptualization to execution. The functionality of the application is written in vanilla JavaScript with the exception of a few lines of jQuery. Overall, a very exciting project with gratifying results.',
     ['HTML', 'CSS', 'SASS', 'Bootstrap', 'JavaScript', 'jQuery', 'Gulp.js'],
@@ -136,8 +215,9 @@ let amGameHub = new Project(
 
 //eSports Marketing Group
 let eSports = new Project(
-    2,
+    1,
     'eSports Marketing Group',
+    'esports.jpg',
     'Online marketing firm for eSports competitors. The site is a hub for people to receive representation, guidance and marketing tools on a professional level.',
     'Lead developer from conceptualization to execution. It was the first site I ever built with Wordpress and served me as an introduction to the CMS platform. It was an interesting concept to work on and I am very happy with the final result.',
     ['Wordpress', 'HTML', 'CSS'],
@@ -147,8 +227,9 @@ let eSports = new Project(
 
 //VX Aviation
 let vxAviation = new Project(
-    3,
+    2,
     'VX Aviation',
+    'vx-aviation.jpg',
     'Company site for a Tampa Bay area based personal flight training school aiming for new student recruitement.',
     'Sole designer and developer from conceptualization to execution. The development of this project was rather fast and enjoyable because of how comfortable I was feeling working with the Bootstrap framework at this point.',
     ['HTML', 'CSS', 'SASS', 'Bootstrap', 'JavaScript', 'jQuery', 'PHP'],
@@ -158,8 +239,9 @@ let vxAviation = new Project(
 
 //Blago-Darya
 let blagoDarya = new Project(
-    4,
+    3,
     'Blago-darya',
+    'blago-darya.jpg',
     'Voluntary initiative to help shelter homeless and wounded animals in Bulgaria. The organization gathers funds through direct donations and product sales.',
     'Sole designer and developer. This is my biggest and most gratifying project to date. It is for a great cause and is being led by a passionate friend which will expand this initiative to become the leading one of its kind in the country.',
     ['Wordpress', 'HTML', 'CSS', 'JavaScript', 'jQuery'],
@@ -170,8 +252,9 @@ let blagoDarya = new Project(
 
 //Travel @ Style
 let travelAtStyle = new Project(
-    5,
+    4,
     'Travel@Style',
+    'travel.jpg',
     'eCommerce platform for a New York based store focusing on travel apparel and hand-held steamer irons.',
     'Sole designer and developer from conceptualization to execution. T@S is my first more complex extracurricular Bootstrap/JavaScript project. It took 2 months of sporadic work to finish it, but it was all worth it because it has all the functionalities it was intended to have.',
     ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'PHP'],
@@ -181,8 +264,9 @@ let travelAtStyle = new Project(
 
 //T&T Customs
 let ttCustoms = new Project(
-    6,
+    5,
     'T&T Customs',
+    'tt.jpg',
     'The site is a front for a business creating custom apparel for school sports teams in the Tampa Bay area.',
     'Lead developer from conceptualization to execution. The site went through several modifications during the development process since new and better creative tools were being provided which were then implemented. The final result was rather pleasing.',
     ['Wordpress', 'HTML', 'CSS'],
@@ -192,8 +276,9 @@ let ttCustoms = new Project(
 
 //The Credit Score Guru
 let creditScoreGuru = new Project(
-    7,
+    6,
     'The Credit Score Guru',
+    'guru.jpg',
     'Credit repair site aiming to present viable options for people to fix their credit score and create positive purchasing habits in the future.',
     'Lead developer from conceptualization to execution. This site was a rather enjoyable project for me to work on because of the relative experience I had already gained working with Wordpress.',
     ['Wordpress', 'HTML', 'CSS'],
@@ -203,8 +288,9 @@ let creditScoreGuru = new Project(
 
 //HUG Tampa Bay
 let hugTampaBay = new Project(
-    8,
+    7,
     'HUG Tampa Bay',
+    'hug.jpg',
     'A Tampa based non-profit organization that strives to connect people with disabilities to social activities and events in the community',
     'I worked on this project in the capacity of web designer for Visual Edge Design. I was tasked to redesign it while being provided with clear instructions what the final outcome should be. Additionally, I incorporated different functionalities and improved on the overall look and feel while sticking to the original character of the site.',
     ['Wordpress', 'HTML', 'CSS', 'JavaScript', 'jQuery'],
@@ -214,8 +300,9 @@ let hugTampaBay = new Project(
 
 //Body Wrap Spalon
 let bwSpalon = new Project(
-    9,
+    8,
     'Body Wrap Spalon',
+    'ispalon.jpg',
     'An Oklahoma based Spa Services website. The site appeals mainly to women, but offers treatments also for men.',
     'Redesign and face-lift of the overall look and feel of the website. I worked on this project in the capacity of web designer for Visual Edge Design. I was tasked to bring this site up to date, by applying design concepts that conform to the 2017 tendencies, while also keeping the already established character of the brand.',
     ['Wordpress', 'HTML', 'CSS', 'JavaScript', 'jQuery'],
@@ -223,11 +310,31 @@ let bwSpalon = new Project(
     'http://www.bodywrapspalon.com/'
 );
 
+let arielBehar = new Project(
+    9,
+    'Ariel Behar Portfolio',
+    'portfolio.jpg',
+    'My personal portfolio. Although originally created in 2017 bla bla blablablab lablabalb',
+    'bla bla blablablab lablabalb description',
+    ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Node.js', 'Express'],
+    'May 2020',
+    'http://www.arielbehar.com'
+)
+
 //Once the each individual project has been created, it has to be added to the projectsArray
-let projectsArray = [amGameHub, eSports, vxAviation, blagoDarya, travelAtStyle, ttCustoms, creditScoreGuru, hugTampaBay, bwSpalon];
+let projectsArray = [amGameHub, eSports, vxAviation, blagoDarya, travelAtStyle, ttCustoms, creditScoreGuru, hugTampaBay, bwSpalon, arielBehar];
 
 //Creating the projects' respective sections
-projectsArray.forEach(project => { project.createSection(); })
+projectsArray.forEach(project => {
+
+    //Creating the carousel's slides for the respective sections
+    project.createSlide();
+
+    //Creates the carousel thumbnails that activate the slider
+    project.createCarouselThumb();
+    //Creating the projects' respective sections
+    project.displaySection();
+})
 
 
 // END OF PROJECTS
@@ -272,7 +379,7 @@ ProjectPSD.prototype = {
                                             <b>${this.name}</b>
                                         </h4>
                                         <h5 class="text-center h5-responsive">
-                                            <a onclick="${this.modalName}.createModal()" href="" data-toggle="modal" data-target="#${this.lowerCaseName}-modal"
+                                            <a onclick="${this.modalName}.createModal()" href="" data-toggle="modal" data-target="#${this.modalName}-modal"
                                                 class="d-inline-block">Project
                                                 Description </a>
                                             <span class="">|</span>
@@ -294,74 +401,66 @@ ProjectPSD.prototype = {
 
         psdCarouselInner.insertAdjacentHTML('afterbegin', template);
 
-        // let createModalClass = document.getElementsByClassName('create-modal');
-        // console.log('createModalClass:', createModalClass)
-
-        // createModalClass.forEach(item => {
-        //     // item.addEventListener('click', () => {
-        //     //     this.createModal();
-        //     // })
-        //     console.log(item);
-        // })
 
     },
     createModal: function () {
-        console.log('bla');
-        // let modalTemplate = `<div class="modal fade psd-to-html-modal" id="${this.modalName}" tabindex="-1" role="dialog"
-        //                         aria-labelledby="myModalLabel" aria-hidden="true">
-        //                         <div class="modal-dialog modal-lg" role="document">
-        //                             <div class="modal-content">
-        //                                 <div class="modal-header">
-        //                                     <h4 class="modal-title w-100 text-white text-center" id="myModalLabel">
-        //                                         <b>${this.name}</b>
-        //                                     </h4>
-        //                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        //                                         <span aria-hidden="true" class="grey-text">&times;</span>
-        //                                     </button>
-        //                                 </div>
-        //                                 <div class="modal-body p-0">
-        //                                     <img src="img/downloaded/${this.image}" class="img-fluid" alt="${this.name}" height="100%" width="100%">
-        //                                     <div class="px-5 py-3">
-        //                                         <h5 class='text-left mb-1'>Project Description:</h5>
-        //                                         <p class='mb-1'>${this.description}</p>
-        //                                         <h5 class='text-left mb-1'>My Role in the Project:</h5>
-        //                                         <p class='mb-1'>${this.myRole}</p>
-        //                                         <h5 class='text-left mb-1'>Technologies Used:</h5>
-        //                                         <ul class='text-left mb-1 list-inline' id="tech-used-psd">
-        //                                         </ul>
-        //                                         <h5 class='text-left mb-1'>Project Launched in: &nbsp;&nbsp;&nbsp;
-        //                                             <span class='text-success'>${this.launchDate}</span>
-        //                                         </h5>
-        //                                         <h5 class='text-left mb-1'>Visit site:
-        //                                             <a href='${this.domain}' target='_blank'>${this.name}</a>
-        //                                         </h5>
-        //                                         <p class="text-muted" id="remarks-psd"></p>
-        //                                     </div>
-        //                                 </div>
-        //                                 <div class="modal-footer">
-        //                                     <button type="button" class="btn btn-lg primary-color-dark" data-dismiss="modal">Close</button>
-        //                                 </div>
-        //                             </div>
-        //                         </div>
-        //                     </div>`;
-        // this.techUsed.forEach(item => {
-        //     if (item === 'Adobe Photoshop') {
-        //         document.getElementById('techs-used-psd').innerHTML += '<li class="list-inline-item text-white">•' + item + '</li>';
-        //     } else {
-        //         document.getElementById('techs-used-psd').innerHTML += '<li class="list-inline-item">•' + item + '</li>';
-        //     }
-        // });
-        // if (this.remarks) {
-        //     document.getElementById('remarks-psd').innerHTML = this.remarks[0] + this.remarks[1];
-        // }
+        let modalTemplate = `<div class="modal fade psd-to-html-modal" id="${this.modalName}-modal" tabindex="-1" role="dialog"
+                                aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title w-100 text-white text-center" id="myModalLabel">
+                                                <b>${this.name}</b>
+                                            </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" class="grey-text">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body p-0">
+                                            <img src="img/downloaded/${this.image}" class="img-fluid" alt="${this.name}" height="100%" width="100%">
+                                            <div class="px-5 py-3">
+                                                <h5 class='text-left mb-1'>Project Description:</h5>
+                                                <p class='mb-1'>${this.description}</p>
+                                                <h5 class='text-left mb-1'>My Role in the Project:</h5>
+                                                <p class='mb-1'>${this.myRole}</p>
+                                                <h5 class='text-left mb-1'>Technologies Used:</h5>
+                                                <ul class='text-left mb-1 list-inline' id="techs-used-psd">
+                                                </ul>
+                                                <h5 class='text-left mb-1'>Project Launched in: &nbsp;&nbsp;&nbsp;
+                                                    <span class='text-success'>${this.launchDate}</span>
+                                                </h5>
+                                                <h5 class='text-left mb-1'>Visit site:
+                                                    <a href='${this.domain}' target='_blank'>${this.name}</a>
+                                                </h5>
+                                                <p class="text-muted" id="remarks-psd"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-lg primary-color-dark" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
 
-        // document.getElementById('modals').innerHTML = modalTemplate;
+
+        document.getElementById('modals').innerHTML = modalTemplate;
+
+        this.techUsed.forEach(item => {
+            if (item === 'Adobe Photoshop') {
+                document.getElementById('techs-used-psd').innerHTML += '<li class="list-inline-item text-white">•' + item + '</li>';
+            } else {
+                document.getElementById('techs-used-psd').innerHTML += '<li class="list-inline-item">•' + item + '</li>';
+            }
+        });
+        if (this.remarks) {
+            document.getElementById('remarks-psd').innerHTML = this.remarks[0] + ' ' + this.remarks[1];
+        }
 
         //REMEMBER TO HANDLE THE REMARKS on certain projects. For example Preferred brands
         // REMEMBER TO FIX THE MODAL NAMES FOR EACH PROJECT
     }
 }
-// function ProjectPSD(number, name, modalName, image, description, myRole, techUsed, launchDate, domain, remarks) {
+
 
 let chiropractor = new ProjectPSD(0, 'Chiropractor', 'chiropractor', 'chiropractor.jpg', 'A fiction chiropractor home page design.', "I designed this mock-up web page in Photoshop, as a potential template to be used in future chiropractor's site development.", ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'], 'April 2020', 'http://chiropractor.arielbehar.com/');
 
@@ -384,8 +483,6 @@ let projectsPSDArray = [chiropractor, preferredBrands, floridaDentalClinic, adva
 
 //Creating the projects' respective sections
 projectsPSDArray.reverse().forEach(project => { project.createSection(); })
-
-
 // END of Photoshop projects
 
 $(() => {
@@ -435,3 +532,9 @@ $(() => {
         $('.yellow.darken-2, .green.darken-2').css('opacity', 1);
     });
 });
+
+//Footer
+const footerDate = document.getElementById('footer-date');
+const year = new Date().getFullYear();
+footerDate.innerHTML = year;
+// End Footer
