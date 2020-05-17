@@ -1,6 +1,6 @@
 {
     "name": "ariel-portfolio",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "An updated and upgraded version of my portfolio with integration of Node and Express",
     "main": "index.js",
     "scripts": {
@@ -18,8 +18,10 @@
     "author": "Ariel Behar",
     "license": "ISC",
     "dependencies": {
+        "body-parser": "^1.19.0",
         "express": "^4.17.1",
-        "hbs": "^4.1.1"
+        "hbs": "^4.1.1",
+        "nodemailer": "^6.4.6"
     },
     "devDependencies": {
         "connect-livereload": "^0.6.1",

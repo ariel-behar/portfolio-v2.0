@@ -490,46 +490,7 @@
 					<div class="col-md-7 col-lg-6 col-12 py-2 mt-1 darker-round">
 
 						<!-- Contact form -->
-						<form action="contact.php" method="post" class="px-3" id="ajax" autocomplete="off">
-
-							<img src="img/downloaded/logo/logo.png" alt="logo">
-							<h3 class="text-center mb-3 mt-1 text-white">CONTACT ME</h3>
-							<p class="text-white">Remarks? Comments? Suggestions? Need a website done or just saying
-								"hi"? Leave your input below and you'll get a response
-								from me within the next 24 hours</p>
-							<div class="md-form">
-								<i class="fa fa-user prefix grey-text"></i>
-								<input type="text" id="name" class="form-control" name="name" tabindex="1" required>
-								<label for="name">Your full name</label>
-							</div>
-
-							<div class="md-form">
-								<i class="fa fa-envelope prefix grey-text"></i>
-								<input type="text" id="email" class="form-control" name="email" tabindex="2" required>
-								<label for="email">Your email</label>
-							</div>
-
-							<div class="md-form">
-								<i class="fa fa-tag prefix grey-text"></i>
-								<input type="text" id="subject" class="form-control" name="subject" tabindex="3"
-									required>
-								<label for="subject">Subject</label>
-							</div>
-
-							<div class="md-form">
-								<i class="fa fa-pencil prefix grey-text"></i>
-								<textarea type="text" id="text-area" class="md-textarea" name="message" tabindex="4"
-									required></textarea>
-								<label for="text-area">Your message</label>
-							</div>
-							<div class="text-center" id="success">
-
-								<button class="btn btn-lg primary-color-dark z-depth-3" type="submit" name="submit">Send
-									<i class="fa fa-paper-plane-o ml-1"></i>
-								</button>
-							</div>
-
-						</form>
+						{{>contactForm}}
 						<!-- Contact form -->
 					</div>
 					<!--/col -->
@@ -645,8 +606,9 @@
 			<!-- /container -->
 		</div>
 		<!-- /#daniel-site-section -->
-
+		<!--Copyright footer-->
 		{{>footer}}
+		<!--End of Copyright footer-->
 	</footer>
 	<!--/.Footer-->
 
@@ -670,43 +632,6 @@
 	</script>
 
 	<script type="text/javascript">
-		//FORM PROCESSING AJAX 
-		$(document).ready(function () {
-			$("#ajax").on("submit", function () {
-
-				var that = $(this),
-					url = that.attr("action"),
-					type = that.attr("method"),
-					data = {};
-
-				that.find("[name]").each(function (index, value) {
-					var that = $(this),
-						name = that.attr("name"),
-						value = that.val();
-
-					data[name] = value;
-				});
-
-				$.ajax({
-					url: url,
-					type: type,
-					data: data,
-					success: function (response) {
-						console.log(response);
-					}
-				});
-				$('#ajax').each(function () {
-					this.reset();
-				});
-
-				$('#success').html(
-					"<p class='text-center text-white mb-0'>Thank you!</p><p class='text-center text-white'>Your form has been submitted successfully</p>"
-				);
-				return false;
-			});
-
-		});
-
 		//Google Analytics
 		(function (i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;

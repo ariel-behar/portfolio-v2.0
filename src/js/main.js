@@ -55,7 +55,14 @@ $(document).ready(() => {
 });
 
 //Languages
-let languages = [['English', 'American flag', 'usa.png', '5 / 5 / 5 / 5'], ['Spanish', 'Spanish flag', 'spain.png', '4 / 4 / 5 / 5'], ['Bulgarian', 'Bulgarian flag', 'bulgaria.png', 'Native'], ['Hebrew', 'Israeli flag', 'israel.png', '5 / 5 / 5 / 5'], ['French', 'French flag', 'france.png', '2 / 2 / 3 / 3'], ['Russian', 'Russian flag', 'russia.png', '2 / 1 / 3 / 3']];
+let languages = [
+    ['English', 'American flag', 'usa.png', '5 / 5 / 5 / 5'],
+    ['Spanish', 'Spanish flag', 'spain.png', '4 / 4 / 5 / 5'],
+    ['Bulgarian', 'Bulgarian flag', 'bulgaria.png', 'Native'],
+    ['Hebrew', 'Israeli flag', 'israel.png', '5 / 5 / 5 / 5'],
+    ['French', 'French flag', 'france.png', '2 / 2 / 3 / 3'],
+    ['Russian', 'Russian flag', 'russia.png', '2 / 1 / 3 / 3'],
+];
 
 const languagesDiv = document.getElementById('languages');
 
@@ -66,12 +73,29 @@ languages.forEach(item => {
                         <span class="text-muted">${item[3]}</span>
                     </div>`;
     languagesDiv.insertAdjacentHTML('beforeend', content);
-})
+});
 // End of Languages
 
-
 //Abilities
-let abilities = [['HTML', 'green', 'html.png'], ['CSS', 'green', 'css.png'], ['Sass', 'green', 'sass.png'], ['Bootstrap', 'green', 'bootstrap.jpg'], ['MDBootstrap', 'green', 'mdbootstrap.jpg'], ['Javascript', 'green', 'js.png'], ['jQuery', 'green', 'jquery.png'], ['JSON', 'green', 'json.jpg'], ['Wordpress', 'green', 'wordpress.png'], ['Gulp.js', 'green', 'gulp.png'], ['Git', 'green', 'git.png'], ['Photoshop', 'green', 'photoshop.png'], ['Premiere', 'yellow', 'premiere.png'], ['Illustrator', 'yellow', 'illustrator-circle.png'], ['Node.js', 'blue', 'node.png'], ['Express', 'blue', 'express.png'], ['MongoDB', 'blue', 'mongodb.png']]
+let abilities = [
+    ['HTML', 'green', 'html.png'],
+    ['CSS', 'green', 'css.png'],
+    ['Sass', 'green', 'sass.png'],
+    ['Bootstrap', 'green', 'bootstrap.jpg'],
+    ['MDBootstrap', 'green', 'mdbootstrap.jpg'],
+    ['Javascript', 'green', 'js.png'],
+    ['jQuery', 'green', 'jquery.png'],
+    ['JSON', 'green', 'json.jpg'],
+    ['Wordpress', 'green', 'wordpress.png'],
+    ['Gulp.js', 'green', 'gulp.png'],
+    ['Git', 'green', 'git.png'],
+    ['Photoshop', 'green', 'photoshop.png'],
+    ['Premiere', 'yellow', 'premiere.png'],
+    ['Illustrator', 'yellow', 'illustrator-circle.png'],
+    ['Node.js', 'blue', 'node.png'],
+    ['Express', 'blue', 'express.png'],
+    ['MongoDB', 'blue', 'mongodb.png'],
+];
 
 const abilitiesDiv = document.getElementById('abilities');
 
@@ -80,9 +104,8 @@ abilities.reverse().forEach(item => {
                             <img src ="img/downloaded/icons/${item[2]}" alt="${item[0]} logo" > ${item[0]}
 					    </div>`;
     abilitiesDiv.insertAdjacentHTML('afterbegin', content);
-})
+});
 //End of Abilities
-
 
 //PROJECTS
 function Project(number, name, projectImage, description, myRole, techUsed, launchDate, domain, remarks) {
@@ -137,9 +160,8 @@ Project.prototype = {
                                     <img class="img-fluid d-block mx-auto"
                                         src="img/downloaded/slides/${this.projectImage}" alt="Slide Number: ${this.number}">
                                 </a>
-                            </div>`
+                            </div>`;
         let carouselThumb = document.querySelector('#carousel-thumb .carousel-inner');
-
 
         carouselThumb.insertAdjacentHTML('beforeend', thumbnailTemplate);
     },
@@ -150,7 +172,7 @@ Project.prototype = {
                             class="active list-inline-item">
                             <img class="d-block w-100"
                                 src="img/downloaded/slides/${this.projectImage}" class="img-fluid">
-                            </li>`
+                            </li>`;
 
         let carouselInnerTemplate = `<div class="carousel-inner" role="listbox"></div>`;
 
@@ -172,7 +194,9 @@ Project.prototype = {
                 document.querySelector(`#thumbnails-carousel-4-thumbs .carousel-inner`).insertAdjacentHTML('beforeend', carouselItemTemplate);
                 document.querySelector(`#thumbnails-carousel-4-thumbs .carousel-inner .carousel-item`).classList.add('active');
 
-                document.querySelector(`#thumbnails-carousel-4-thumbs .carousel-inner .carousel-item div ol#thumbs-4-slide-${Math.floor(carouselItemSlide).toFixed(0)}`).insertAdjacentHTML('beforeend', `<li data-target="#carousel-thumb" data-slide-to='0' class="list-inline-item d-none"></li>`)
+                document
+                    .querySelector(`#thumbnails-carousel-4-thumbs .carousel-inner .carousel-item div ol#thumbs-4-slide-${Math.floor(carouselItemSlide).toFixed(0)}`)
+                    .insertAdjacentHTML('beforeend', `<li data-target="#carousel-thumb" data-slide-to='0' class="list-inline-item d-none"></li>`);
 
                 if (projectCounter % 4 == 0) {
                     insertProject(4, carouselItemSlide);
@@ -183,10 +207,8 @@ Project.prototype = {
                 if (projectCounter % 4 == 0) {
                     createNewSlide(4, carouselItemTemplate);
                     insertProject(4, carouselItemSlide);
-
                 } else {
                     insertProject(4, Math.floor(carouselItemSlide).toFixed(0));
-
                 }
             }
         }
@@ -195,9 +217,11 @@ Project.prototype = {
             document.querySelector(`#thumbnails-carousel-${num}-thumbs .carousel-inner`).insertAdjacentHTML('beforeend', carouselItemTemplate);
         }
         function insertProject(num, carouselItemSlide) {
-            document.querySelector(`#thumbnails-carousel-${num}-thumbs .carousel-inner .carousel-item div ol#thumbs-4-slide-${Math.floor(carouselItemSlide).toFixed(0)}`).insertAdjacentHTML('beforeend', projectTemplate)
+            document
+                .querySelector(`#thumbnails-carousel-${num}-thumbs .carousel-inner .carousel-item div ol#thumbs-4-slide-${Math.floor(carouselItemSlide).toFixed(0)}`)
+                .insertAdjacentHTML('beforeend', projectTemplate);
         }
-    }
+    },
 };
 
 //A&M GameHub
@@ -314,19 +338,18 @@ let arielBehar = new Project(
     9,
     'Ariel Behar Portfolio',
     'portfolio.jpg',
-    'My personal portfolio. Although originally created in 2017 bla bla blablablab lablabalb',
+    'My personal portfolio. Version 2.0',
     'bla bla blablablab lablabalb description',
     ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Node.js', 'Express'],
     'May 2020',
     'http://www.arielbehar.com'
-)
+);
 
 //Once the each individual project has been created, it has to be added to the projectsArray
 let projectsArray = [amGameHub, eSports, vxAviation, blagoDarya, travelAtStyle, ttCustoms, creditScoreGuru, hugTampaBay, bwSpalon, arielBehar];
 
 //Creating the projects' respective sections
 projectsArray.forEach(project => {
-
     //Creating the carousel's slides for the respective sections
     project.createSlide();
 
@@ -334,8 +357,7 @@ projectsArray.forEach(project => {
     project.createCarouselThumb();
     //Creating the projects' respective sections
     project.displaySection();
-})
-
+});
 
 // END OF PROJECTS
 
@@ -395,13 +417,11 @@ ProjectPSD.prototype = {
         const psdCarouselIndicators = document.getElementById('psd-carousel-indicators');
         const carouselItemTemplate = `<li data-target="#carousel-psd" data-slide-to="${this.number}" class="${classActive}"></li>`;
 
-        psdCarouselIndicators.insertAdjacentHTML('afterbegin', carouselItemTemplate)
+        psdCarouselIndicators.insertAdjacentHTML('afterbegin', carouselItemTemplate);
 
         const psdCarouselInner = document.getElementById('psd-carousel-inner');
 
         psdCarouselInner.insertAdjacentHTML('afterbegin', template);
-
-
     },
     createModal: function () {
         let modalTemplate = `<div class="modal fade psd-to-html-modal" id="${this.modalName}-modal" tabindex="-1" role="dialog"
@@ -442,7 +462,6 @@ ProjectPSD.prototype = {
                                 </div>
                             </div>`;
 
-
         document.getElementById('modals').innerHTML = modalTemplate;
 
         this.techUsed.forEach(item => {
@@ -458,31 +477,104 @@ ProjectPSD.prototype = {
 
         //REMEMBER TO HANDLE THE REMARKS on certain projects. For example Preferred brands
         // REMEMBER TO FIX THE MODAL NAMES FOR EACH PROJECT
-    }
-}
+    },
+};
 
+let chiropractor = new ProjectPSD(
+    0,
+    'Chiropractor',
+    'chiropractor',
+    'chiropractor.jpg',
+    'A fiction chiropractor home page design.',
+    "I designed this mock-up web page in Photoshop, as a potential template to be used in future chiropractor's site development.",
+    ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'],
+    'April 2020',
+    'http://chiropractor.arielbehar.com/'
+);
 
-let chiropractor = new ProjectPSD(0, 'Chiropractor', 'chiropractor', 'chiropractor.jpg', 'A fiction chiropractor home page design.', "I designed this mock-up web page in Photoshop, as a potential template to be used in future chiropractor's site development.", ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'], 'April 2020', 'http://chiropractor.arielbehar.com/');
+let preferredBrands = new ProjectPSD(
+    1,
+    'Preferred Brands Inc',
+    'preferredBrands',
+    'preferredbrandsinc.jpg',
+    'A brokerage company representing fine wines, spirits, mixers, and specialty food products.',
+    'I was tasked with an entire concept re-design of a home page of an the already existing website. The idea was to bring the site up to date with current 2017 trends in contrast to the existing ones from 2006. I did this project in the capacity of web designer for Visual Edge Design.',
+    ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'],
+    'Dec 2017',
+    'http://preferredbrandsinc.arielbehar.com/',
+    ['*Feel free to see the original site on which this project is based on', '<a href="http://preferredbrandsinc.com/" target="_blank">here</a>']
+);
 
+let floridaDentalClinic = new ProjectPSD(
+    2,
+    'Florida Dental Clinic',
+    'floridaDentalClinic',
+    'florida-dental-clinic.jpg',
+    'A fictional dental clinic home page design.',
+    'I designed this mock-up website in Photoshop for Visual Edge Design, as a potential template to be used in future dental site development.',
+    ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'],
+    'Dec 2017',
+    'http://florida-dental-clinic.arielbehar.com/'
+);
 
-let preferredBrands = new ProjectPSD(1, 'Preferred Brands Inc', 'preferredBrands', 'preferredbrandsinc.jpg', 'A brokerage company representing fine wines, spirits, mixers, and specialty food products.', 'I was tasked with an entire concept re-design of a home page of an the already existing website. The idea was to bring the site up to date with current 2017 trends in contrast to the existing ones from 2006. I did this project in the capacity of web designer for Visual Edge Design.', ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'], 'Dec 2017', 'http://preferredbrandsinc.arielbehar.com/', ['*Feel free to see the original site on which this project is based on', '<a href="http://preferredbrandsinc.com/" target="_blank">here</a>']);
+let advancedCabinetServices = new ProjectPSD(
+    3,
+    'Advanced Cabinet Services',
+    'advancedCabinetServices',
+    'advancedcabinetservices.jpg',
+    'A company selling hardware and accessories for home improvement',
+    'I was tasked with designing a face lift home page of the already existing website while sticking as much as possible to the original look of the same page from 2010. I did this project in the capacity of web designer for Visual Edge Design.',
+    ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'],
+    'Dec 2017',
+    'http://advancedcabinetservices.arielbehar.com/',
+    ['*Feel free to see the original site on which this project is based on', '<a href="https://www.advancedcabinetservices.com/" target="_blank">here</a>']
+);
 
-let floridaDentalClinic = new ProjectPSD(2, 'Florida Dental Clinic', 'floridaDentalClinic', 'florida-dental-clinic.jpg', 'A fictional dental clinic home page design.', 'I designed this mock-up website in Photoshop for Visual Edge Design, as a potential template to be used in future dental site development.', ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'], 'Dec 2017', 'http://florida-dental-clinic.arielbehar.com/');
+let dentalClinic = new ProjectPSD(
+    4,
+    'Dental Clinic',
+    'dentalClinic',
+    'dental-clinic.jpg',
+    'A fiction dental clinic home page design.',
+    'I designed this site in Photoshop for Visual Edge Design, as a potential template to be used in future dental site development.',
+    ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'],
+    'Dec 2017',
+    'http://dental-clinic.arielbehar.com/'
+);
 
-let advancedCabinetServices = new ProjectPSD(3, 'Advanced Cabinet Services', 'advancedCabinetServices', 'advancedcabinetservices.jpg', 'A company selling hardware and accessories for home improvement', 'I was tasked with designing a face lift home page of the already existing website while sticking as much as possible to the original look of the same page from 2010. I did this project in the capacity of web designer for Visual Edge Design.', ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'], 'Dec 2017', 'http://advancedcabinetservices.arielbehar.com/', ['*Feel free to see the original site on which this project is based on', '<a href="https://www.advancedcabinetservices.com/" target="_blank">here</a>']);
+let stylishPortfolio = new ProjectPSD(
+    5,
+    'Stylish Portfolio',
+    'stylishPortfolio',
+    'stylish-portfolio.jpg',
+    'Portfolio site for a fictional web and graphic design company. One pager with no actual functionalities and no other purpose apart from pure Photoshop practice and Bootstrap based recreation.',
+    'The Photoshop design for this project is not mine although I did compose the actual PSD file. The conversion to an HTML based website is entirely on me and it was my first project on which I practiced accurate recreation of an already existing design. Having the Photoshop file available in front of me helped me finish this project in about 2 hours.',
+    ['HTML', 'CSS', 'SASS', 'Bootstrap', 'Adobe Photoshop'],
+    'Oct 2017',
+    'http://stylish-portfolio.arielbehar.com/',
+    ["* Feel free to check out Mir Rom's tutorial on which this project is based on", '<a href="https://www.youtube.com/watch?v=GKRQC4fLNHs&amp;t=677s" target="_blank">here</a>']
+);
 
-let dentalClinic = new ProjectPSD(4, 'Dental Clinic', 'dentalClinic', 'dental-clinic.jpg', 'A fiction dental clinic home page design.', 'I designed this site in Photoshop for Visual Edge Design, as a potential template to be used in future dental site development.', ['HTML', 'CSS', 'SASS', 'Javascript', 'Gulp.js', 'Adobe Photoshop'], 'Dec 2017', 'http://dental-clinic.arielbehar.com/');
-
-let stylishPortfolio = new ProjectPSD(5, 'Stylish Portfolio', 'stylishPortfolio', 'stylish-portfolio.jpg', 'Portfolio site for a fictional web and graphic design company. One pager with no actual functionalities and no other purpose apart from pure Photoshop practice and Bootstrap based recreation.', 'The Photoshop design for this project is not mine although I did compose the actual PSD file. The conversion to an HTML based website is entirely on me and it was my first project on which I practiced accurate recreation of an already existing design. Having the Photoshop file available in front of me helped me finish this project in about 2 hours.', ['HTML', 'CSS', 'SASS', 'Bootstrap', 'Adobe Photoshop'], 'Oct 2017', 'http://stylish-portfolio.arielbehar.com/', ['* Feel free to check out Mir Rom\'s tutorial on which this project is based on', '<a href="https://www.youtube.com/watch?v=GKRQC4fLNHs&amp;t=677s" target="_blank">here</a>']);
-
-let hizamoPortfolio = new ProjectPSD(6, 'Hizamo Portfolio', 'hizamoPortfolio', 'hizamo-portfolio.jpg', 'Portfolio site for a fictional web design company. One pager with no actual functionalities and no other purpose apart from pure Photoshop practice and Bootstrap based recreation.', 'The Photoshop design for this project is not mine although I did compose the actual PSD file. The conversion to an HTML based website is entirely on me and it was my second project on which I practiced accurate recreation of an already existing design. Having the Photoshop file available in front of me helped me finish this project in about 2 hours.', ['HTML', 'CSS', 'SASS', 'Bootstrap', 'Adobe Photoshop'], 'Oct 2017', 'http://hizamo-portfolio.arielbehar.com/', ['* Feel free to check out Mir Rom\'s tutorial on which this project is based on', '<a href="https://www.youtube.com/watch?v=qZ3zbDzDuFU&t=200s" target="_blank">here</a>']);
-
+let hizamoPortfolio = new ProjectPSD(
+    6,
+    'Hizamo Portfolio',
+    'hizamoPortfolio',
+    'hizamo-portfolio.jpg',
+    'Portfolio site for a fictional web design company. One pager with no actual functionalities and no other purpose apart from pure Photoshop practice and Bootstrap based recreation.',
+    'The Photoshop design for this project is not mine although I did compose the actual PSD file. The conversion to an HTML based website is entirely on me and it was my second project on which I practiced accurate recreation of an already existing design. Having the Photoshop file available in front of me helped me finish this project in about 2 hours.',
+    ['HTML', 'CSS', 'SASS', 'Bootstrap', 'Adobe Photoshop'],
+    'Oct 2017',
+    'http://hizamo-portfolio.arielbehar.com/',
+    ["* Feel free to check out Mir Rom's tutorial on which this project is based on", '<a href="https://www.youtube.com/watch?v=qZ3zbDzDuFU&t=200s" target="_blank">here</a>']
+);
 
 //Once the each individual project has been created, it has to be added to the projectsArray
 let projectsPSDArray = [chiropractor, preferredBrands, floridaDentalClinic, advancedCabinetServices, dentalClinic, stylishPortfolio, hizamoPortfolio];
 
 //Creating the projects' respective sections
-projectsPSDArray.reverse().forEach(project => { project.createSection(); })
+projectsPSDArray.reverse().forEach(project => {
+    project.createSection();
+});
 // END of Photoshop projects
 
 $(() => {
