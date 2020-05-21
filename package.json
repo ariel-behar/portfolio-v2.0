@@ -4,7 +4,7 @@
     "description": "An updated and upgraded version of my portfolio with integration of Node and Express",
     "main": "index.js",
     "scripts": {
-        "start": "node src/index.js",
+        "start": "node index.js",
         "dev": "nodemon -e js,hbs --ignore public"
     },
     "keywords": [
