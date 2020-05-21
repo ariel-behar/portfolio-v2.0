@@ -45,8 +45,8 @@ router.post('/', urlencodedParser, async (req, res) => {
     let info = await transporter.sendMail({
         from: '"www.arielbehar.com" PORTFOLIO SITE', // sender address
         to: 'ariel.behar@hotmail.com', // list of receivers
-        subject: 'Portfolio Site Submission', // Subject line
-        text: 'Hello world?', // plain text body
+        subject: 'PORTFOLIO SITE SUBMISSION', // Subject line
+        text: 'PORTFOLIO FORM SUBMISSION', // plain text body
         html: output, // html body
     });
 

@@ -95,6 +95,7 @@ let abilities = [
     ['Node.js', 'blue', 'node.png'],
     ['Express', 'blue', 'express.png'],
     ['MongoDB', 'blue', 'mongodb.png'],
+    ['Heroku', 'blue', 'heroku.png'],
 ];
 
 const abilitiesDiv = document.getElementById('abilities');
@@ -105,6 +106,29 @@ abilities.reverse().forEach(item => {
 					    </div>`;
     abilitiesDiv.insertAdjacentHTML('afterbegin', content);
 });
+
+//Abilities coloring
+$(() => {
+    $('#proficient').mouseenter(() => {
+        $('.yellow.darken-2, .blue.darken-2').css('opacity', 0.2);
+    });
+    $('#proficient').mouseleave(() => {
+        $('.yellow.darken-2, .blue.darken-2').css('opacity', 1);
+    });
+    $('#competent').mouseenter(() => {
+        $('.green.darken-2, .blue.darken-2').css('opacity', 0.2);
+    });
+    $('#competent').mouseleave(() => {
+        $('.green.darken-2, .blue.darken-2').css('opacity', 1);
+    });
+    $('#novice').mouseenter(() => {
+        $('.yellow.darken-2, .green.darken-2').css('opacity', 0.2);
+    });
+    $('#novice').mouseleave(() => {
+        $('.yellow.darken-2, .green.darken-2').css('opacity', 1);
+    });
+});
+
 //End of Abilities
 
 //PROJECTS
@@ -224,9 +248,21 @@ Project.prototype = {
     },
 };
 
+//Ariel Behar portfolio
+let arielBehar = new Project(
+    0,
+    'Ariel Behar Portfolio',
+    'portfolio.jpg',
+    "My personal portfolio. Version 2.0 <br> (The site you're currently on)",
+    'Although my original site was created in 2017, this version has undergone a thorough "behind the scenes" make-over. For one thing, Node & Express are now handling the back-end part. I\'ve further incorporated various element generators throughout, resulting in the code optimization (from 1500 to 700 lines of HTML), while also offering the original functionalities and boosting the overall performance.',
+    ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Node.js', 'Express'],
+    'May 2020',
+    'http://www.arielbehar.com'
+);
+
 //A&M GameHub
 let amGameHub = new Project(
-    0,
+    1,
     'A&M GameHub',
     'am-gamehub.jpg',
     'A desktop based web application to assist my little sisters learn English, European geography and Hebrew.',
@@ -234,12 +270,12 @@ let amGameHub = new Project(
     ['HTML', 'CSS', 'SASS', 'Bootstrap', 'JavaScript', 'jQuery', 'Gulp.js'],
     'Jan 2018',
     'http://www.am-gamehub.arielbehar.com/',
-    "<br><span class='text-muted pl-2'>*The site's language is Bulgarian.</span><br><span class='text-muted pl-2'>*Optimized only for large screen sizes.</span>"
+    "<br><span class='text-muted pl-2'>*The site's language is Bulgarian.</span><br><span class='text-muted pl-2'>*Optimized for large screen sizes only.</span>"
 );
 
 //eSports Marketing Group
 let eSports = new Project(
-    1,
+    2,
     'eSports Marketing Group',
     'esports.jpg',
     'Online marketing firm for eSports competitors. The site is a hub for people to receive representation, guidance and marketing tools on a professional level.',
@@ -251,7 +287,7 @@ let eSports = new Project(
 
 //VX Aviation
 let vxAviation = new Project(
-    2,
+    3,
     'VX Aviation',
     'vx-aviation.jpg',
     'Company site for a Tampa Bay area based personal flight training school aiming for new student recruitement.',
@@ -263,7 +299,7 @@ let vxAviation = new Project(
 
 //Blago-Darya
 let blagoDarya = new Project(
-    3,
+    4,
     'Blago-darya',
     'blago-darya.jpg',
     'Voluntary initiative to help shelter homeless and wounded animals in Bulgaria. The organization gathers funds through direct donations and product sales.',
@@ -276,7 +312,7 @@ let blagoDarya = new Project(
 
 //Travel @ Style
 let travelAtStyle = new Project(
-    4,
+    5,
     'Travel@Style',
     'travel.jpg',
     'eCommerce platform for a New York based store focusing on travel apparel and hand-held steamer irons.',
@@ -288,7 +324,7 @@ let travelAtStyle = new Project(
 
 //T&T Customs
 let ttCustoms = new Project(
-    5,
+    6,
     'T&T Customs',
     'tt.jpg',
     'The site is a front for a business creating custom apparel for school sports teams in the Tampa Bay area.',
@@ -300,7 +336,7 @@ let ttCustoms = new Project(
 
 //The Credit Score Guru
 let creditScoreGuru = new Project(
-    6,
+    7,
     'The Credit Score Guru',
     'guru.jpg',
     'Credit repair site aiming to present viable options for people to fix their credit score and create positive purchasing habits in the future.',
@@ -312,7 +348,7 @@ let creditScoreGuru = new Project(
 
 //HUG Tampa Bay
 let hugTampaBay = new Project(
-    7,
+    8,
     'HUG Tampa Bay',
     'hug.jpg',
     'A Tampa based non-profit organization that strives to connect people with disabilities to social activities and events in the community',
@@ -324,7 +360,7 @@ let hugTampaBay = new Project(
 
 //Body Wrap Spalon
 let bwSpalon = new Project(
-    8,
+    9,
     'Body Wrap Spalon',
     'ispalon.jpg',
     'An Oklahoma based Spa Services website. The site appeals mainly to women, but offers treatments also for men.',
@@ -334,19 +370,8 @@ let bwSpalon = new Project(
     'http://www.bodywrapspalon.com/'
 );
 
-let arielBehar = new Project(
-    9,
-    'Ariel Behar Portfolio',
-    'portfolio.jpg',
-    'My personal portfolio. Version 2.0',
-    'bla bla blablablab lablabalb description',
-    ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Node.js', 'Express'],
-    'May 2020',
-    'http://www.arielbehar.com'
-);
-
 //Once the each individual project has been created, it has to be added to the projectsArray
-let projectsArray = [amGameHub, eSports, vxAviation, blagoDarya, travelAtStyle, ttCustoms, creditScoreGuru, hugTampaBay, bwSpalon, arielBehar];
+let projectsArray = [arielBehar, amGameHub, eSports, vxAviation, blagoDarya, travelAtStyle, ttCustoms, creditScoreGuru, hugTampaBay, bwSpalon];
 
 //Creating the projects' respective sections
 projectsArray.forEach(project => {
@@ -577,6 +602,22 @@ projectsPSDArray.reverse().forEach(project => {
 });
 // END of Photoshop projects
 
+// TV on/off
+$(document).ready(function () {
+    $('#on-button').on('click', function () {
+        $('#on-button').addClass('text-success');
+        $('#off-button').removeClass('text-danger');
+        $('#psd-to-html-video').fadeTo(300, 1);
+    });
+    $('#off-button').on('click', function () {
+        $('#off-button').addClass('text-danger');
+        $('#on-button').removeClass('text-success');
+        $('#psd-to-html-video').fadeTo(300, 0);
+    });
+});
+// END of Photoshop projects section
+
+// Sleepy Daniel section
 $(() => {
     $('#bonus-button').on('click', () => {
         $('#bonus-div').slideUp();
@@ -590,40 +631,16 @@ $(() => {
         $('#daniel-site-section').hide(500);
     });
 });
+// End of Sleepy Daniel Section
 
-$(document).ready(function () {
-    $('#on-button').on('click', function () {
-        $('#on-button').addClass('text-success');
-        $('#off-button').removeClass('text-danger');
-        $('#psd-to-html-video').fadeTo(300, 1);
-    });
-    $('#off-button').on('click', function () {
-        $('#off-button').addClass('text-danger');
-        $('#on-button').removeClass('text-success');
-        $('#psd-to-html-video').fadeTo(300, 0);
-    });
+//Form handling
+let form = document.getElementById('contact-form');
+
+form.addEventListener('submit', form => {
+    form.preventDefault();
 });
 
-$(() => {
-    $('#proficient').mouseenter(() => {
-        $('.yellow.darken-2, .blue.darken-2').css('opacity', 0.2);
-    });
-    $('#proficient').mouseleave(() => {
-        $('.yellow.darken-2, .blue.darken-2').css('opacity', 1);
-    });
-    $('#competent').mouseenter(() => {
-        $('.green.darken-2, .blue.darken-2').css('opacity', 0.2);
-    });
-    $('#competent').mouseleave(() => {
-        $('.green.darken-2, .blue.darken-2').css('opacity', 1);
-    });
-    $('#novice').mouseenter(() => {
-        $('.yellow.darken-2, .green.darken-2').css('opacity', 0.2);
-    });
-    $('#novice').mouseleave(() => {
-        $('.yellow.darken-2, .green.darken-2').css('opacity', 1);
-    });
-});
+//End of form handling
 
 //Footer
 const footerDate = document.getElementById('footer-date');
