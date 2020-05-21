@@ -5,8 +5,8 @@ const path = require('path');
 const router = require('./routes/routing');
 
 //Starting point for modules for livereload
-const livereload = require('livereload');
-const connectLiveReload = require('connect-livereload');
+// const livereload = require('livereload');
+// const connectLiveReload = require('connect-livereload');
 // Ending point for modules for livereload
 
 const app = express();
@@ -18,15 +18,15 @@ const viewsPath = path.join(__dirname, './templates/views/');
 const partialsPath = path.join(__dirname, './templates/partials/');
 
 // Starting point for code for livereload
-const liveReloadServer = livereload.createServer();
-liveReloadServer.watch(publicDirectoryPath);
-liveReloadServer.server.once('connection', () => {
-    setTimeout(() => {
-        liveReloadServer.refresh('/');
-    }, 100);
-});
+// const liveReloadServer = livereload.createServer();
+// liveReloadServer.watch(publicDirectoryPath);
+// liveReloadServer.server.once('connection', () => {
+//     setTimeout(() => {
+//         liveReloadServer.refresh('/');
+//     }, 100);
+// });
 
-app.use(connectLiveReload());
+// app.use(connectLiveReload());
 //Ending point for the code for livereload
 
 app.set('view engine', 'hbs');
