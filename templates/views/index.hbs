@@ -632,6 +632,43 @@
 	</script>
 
 	<script type="text/javascript">
+
+		//FORM PROCESSING AJAX 
+		$(document).ready(function () {
+			$("#contact-form").on("submit", function () {
+
+				var that = $(this),
+					url = that.attr("action"),
+					type = that.attr("method"),
+					data = {};
+
+				that.find("[name]").each(function (index, value) {
+					var that = $(this),
+						name = that.attr("name"),
+						value = that.val();
+
+					data[name] = value;
+				});
+
+				$.ajax({
+					url: url,
+					type: type,
+					data: data,
+					success: function (response) {
+						console.log(response);
+					}
+				});
+				$('#contact-form').each(function () {
+					this.reset();
+				});
+
+				$('#success').html(
+					"<p class='text-center text-white mb-0'>Thank you!</p><p class='text-center text-white'>Your form has been submitted successfully</p>"
+				);
+				return false;
+			});
+
+		});
 		//Google Analytics
 		(function (i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;
