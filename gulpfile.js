@@ -1,101 +1,117 @@
-var gulp = require('gulp'); //npm install --save-dev gulp-...
-var imagemin = require('gulp-imagemin');
-var uglify = require('gulp-terser');
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
-var autoprefixer = require('gulp-autoprefixer');
-var cleancss = require('gulp-clean-css');
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
+//NPM COMMANDS TO RUN
+// npm install --save-dev gulp autoprefixer cssnano gulp-concat gulp-postcss gulp-sass gulp-sourcemaps gulp-terser gulp-imagemin gulp-purgecss gulp-babel @babel/core @babel/preset-env
 
-//Directory variables
-var publicCSS = 'public/css';
-var publicJS = 'public/js';
-var publicIMG = 'public/img';
 
-/*  --TOP LEVEL FUNCTIONS
-    gulp.task - Define tasks
-    gulp.src - Points to files to use
-    gulp.dest - Points to folder to output
-    gulp.watch - Watch files and folders for changes
-*/
+//Initialize modules
+const { src, dest, task, watch, parallel, series } = require('gulp');
 
-// Copy all HTML files
-// gulp.task("copyHtml", function(){
-//     gulp.src("src/*.html")
-//         .pipe(gulp.dest("public"));
-// });
+const autoprefixer = require('autoprefixer'); // Autoprefixes CSS for older browsers
+const cssnano = require('cssnano'); // Minifies CSS
+const concat = require('gulp-concat'); // Concatenates files. For JS files, you need to toggle it the 'js' task
+const postcss = require('gulp-postcss'); // 
+const sass = require('gulp-sass'); // Converts SASS to CSS
+const sourcemaps = require('gulp-sourcemaps'); // Creates maps for CSS and JS
+const terser = require('gulp-terser'); // Minifies JS
+const imagemin = require('gulp-imagemin'); // Minifies Images
+const purgecss = require('gulp-purgecss'); // Removes Unnecessary CSS. Needs to be called separately
+const babel = require('gulp-babel'); // Converts ES6 syntax to older
 
-// LOGS MESSAGE
-gulp.task('message', function (done) {
-    return console.log('Gulp is running...');
+// Source file paths
+const srcFile = {
+    templates: 'templates/**/*.hbs',
+    css: 'src/css/*.css',
+    scss: 'src/scss/*.scss',
+    js: 'src/js/*.js',
+    img: 'src/img/**/*',
+};
+
+// Output directories
+const public = {
+    css: 'public/css',
+    js: 'public/js',
+    img: 'public/img/',
+};
+
+// Logs Message
+task('message', done => {
+    console.log('Gulp is running...');
     done();
 });
 
-// Optimize images
-gulp.task('imagemin', function (done) {
-    gulp.src('src/img/*')
+// SCSS Task
+task('scss', done => {
+    src(srcFile.scss)
+        .pipe(sourcemaps.init()) // Maps CSS files back to the original SASS files
+        .pipe(sass().on('error', sass.logError)) // Complies SASS to CSS files and logs errors if there any
         .pipe(
-            imagemin([
-                imagemin.gifsicle({ interlaced: true }),
-                imagemin.jpegtran({ progressive: true }),
-                imagemin.optipng({ optimizationLevel: 5 }),
-                imagemin.svgo({
-                    plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
+            postcss([
+                autoprefixer({
+                    //Autoprefixes CSS
+                    overrideBrowserslist: ['last 3 versions'],
+                    cascade: false,
                 }),
+                cssnano(), //Minifies CSS Files
             ])
         )
-        .pipe(gulp.dest(publicIMG));
+        .pipe(sourcemaps.write('.')) //Writes CSS Map files in the same output folder
+        .pipe(dest(public.css)); //Outputs the files in the public/css folder
     done();
 });
 
-// JS HINT
-// gulp.task('hint', function (done) {
-//     return gulp.src('src/js/*.js').pipe(jshint('.jshintrc')).pipe(jshint.reporter(stylish));
-//     done();
-// });
+// JS task (concatenates and minifies javascript)
+task('js', done => {
+    src(srcFile.js)
+        .pipe(sourcemaps.init()) //Creates the source map of the JS file
+        .pipe(babel({ // Transcribes the ES6 syntax to older
+            presets: ['@babel/env']
+        }))
+        .pipe(terser()) //This minifies the JS files
+        // .pipe(concat('main.js')) //Toggle this if you don't want JS files to be concatenated
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest(public.js)); //Outputs the files in the public/js folder
+    done();
+});
 
-//MINIFY JS
-// gulp.task("minify",function(){
-//     gulp.src("src/js/main.js")
-//         .pipe(uglify())
-//         .pipe(gulp.dest(publicJS));
-// });
-
-//COMPILE SASS
-gulp.task('sass', function (done) {
-    gulp.src('src/sass/style.scss')
-        .pipe(sass().on('error', sass.logError))
+// IMAGE task
+task('image', done => {
+    src(srcFile.img)
         .pipe(
-            autoprefixer({
-                //Autoprefixer
-                overrideBrowserslist: ['last 3 versions'],
-                cascade: false,
+            imagemin({
+                verbose: true,
+            })
+        ) //Minifies images
+        .pipe(dest(public.img));
+    done();
+});
+
+
+// Purges unused CSS. In order to do it properly, copy all the CSS files you'd like to process  
+// from the public/css to the src/css and then run 'gulp purgecss'. All the CSS files will be optimized
+task('purgecss', done => {
+    src(srcFile.css) //Minifies CSS Files
+        .pipe(
+            purgecss({
+                content: ['templates/**/*.hbs'], // comparing it against the files in this folder
             })
         )
-        .pipe(cleancss()) //Minify CSS - Toggle as a comment if you don't want to minify at the moment
-        .pipe(gulp.dest(publicCSS));
+        .pipe(dest(public.css));
     done();
 });
 
-//CONCATENATE JS FILES - so all the files are concatenated and minified, don't run "minify"
-gulp.task('concat', function () {
-    return gulp.src('src/js/*.js').pipe(concat('main.js')).pipe(uglify()).pipe(gulp.dest(publicJS));
+// Watch task (automatically detects changes)
+// Watches and executes all these task without having to "gulp default" every time
+task('watch', () => {
+    watch(srcFile.scss, series('scss'));
+    watch(srcFile.js, series('js'));
+    watch(srcFile.img, series('image'));
 });
 
+// Default task (main taks that will run everything when typed in the command line)
 // EXECUTE ALL with "gulp" or "gulp default" commands
-gulp.task(
-    'default',
-    gulp.series('message', 'imagemin', 'sass', 'concat', done => {
-        done();
-    })
-);
-
-//Watches and executes all these task without having to "gulp default" every time
-gulp.task('watch', function () {
-    // gulp.watch('src/js/*.js', gulp.series('hint'));
-    gulp.watch('src/js/*.js', gulp.series('concat'));
-    gulp.watch('src/img/*', gulp.series('imagemin'));
-    gulp.watch('src/sass/*.scss', gulp.series('sass'));
-    // gulp.watch("src/*.html", ["copyHtml"]);
+task('default', done => {
+    series('message', 'scss', 'js', 'image');
+    done();
 });
+
+
+

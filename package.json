@@ -25,19 +25,20 @@
         "nodemailer": "^6.4.6"
     },
     "devDependencies": {
+        "@babel/core": "^7.10.2",
+        "@babel/preset-env": "^7.10.2",
+        "autoprefixer": "^9.8.0",
         "connect-livereload": "^0.6.1",
+        "cssnano": "^4.1.10",
         "gulp": "^4.0.2",
-        "gulp-autoprefixer": "^7.0.1",
-        "gulp-clean-css": "^4.3.0",
+        "gulp-babel": "^8.0.0",
         "gulp-concat": "^2.6.1",
         "gulp-imagemin": "^7.1.0",
-        "gulp-jshint": "^2.1.0",
-        "gulp-livereload": "^4.0.2",
-        "gulp-minify-css": "^1.2.4",
+        "gulp-postcss": "^8.0.0",
+        "gulp-purgecss": "^2.2.0",
         "gulp-sass": "^4.1.0",
+        "gulp-sourcemaps": "^2.6.5",
         "gulp-terser": "^1.2.0",
-        "jshint": "^2.11.1",
-        "jshint-stylish": "^2.2.1",
         "livereload": "^0.9.1",
         "nodemon": "^2.0.4"
     }
