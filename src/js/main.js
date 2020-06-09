@@ -90,12 +90,13 @@ let abilities = [
     ['Gulp.js', 'green', 'gulp.png'],
     ['Git', 'green', 'git.png'],
     ['Photoshop', 'green', 'photoshop.png'],
+    ['Node.js', 'yellow', 'node.png'],
+    ['Express', 'yellow', 'express.png'],
+    ['Heroku', 'yellow', 'heroku.png'],
     ['Premiere', 'yellow', 'premiere.png'],
-    ['Illustrator', 'yellow', 'illustrator-circle.png'],
-    ['Node.js', 'blue', 'node.png'],
-    ['Express', 'blue', 'express.png'],
     ['MongoDB', 'blue', 'mongodb.png'],
-    ['Heroku', 'blue', 'heroku.png'],
+    ['Illustrator', 'blue', 'illustrator-circle.png'],
+
 ];
 
 const abilitiesDiv = document.getElementById('abilities');
@@ -248,13 +249,25 @@ Project.prototype = {
     },
 };
 
+// Brasileirao 2019
+let brasileirao = new Project(
+    0,
+    'Brasileirão 2019',
+    'brasileirao.jpg',
+    'A fictional website on the topic of the "Brasileirão" 2019 Soccer Championship',
+    'Sole designer and developer from conceptualization to execution. The site fictionally explores the Brasileirão competition of 2019. Its back-end is handled by Node & Express, while its functionality is written in vanilla JS. The project presents fast and visually pleasant results.',
+    ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Node.js', 'Express'],
+    'June 2020',
+    'http://brasileirao.arielbehar.com/'
+);
+
 //Ariel Behar portfolio
 let arielBehar = new Project(
-    0,
+    1,
     'Ariel Behar Portfolio',
     'portfolio.jpg',
     "My personal portfolio. Version 2.0 <br> (The site you're currently on)",
-    'Although my original site was created in 2017, this version has undergone a thorough "behind the scenes" make-over. For one thing, Node & Express are now handling the back-end part. I\'ve further incorporated various element generators throughout, resulting in the code optimization (from 1500 to 700 lines of HTML), while also offering the original functionalities and boosting the overall performance.',
+    'Although my original site was created in 2017, this version has undergone a thorough "behind the scenes" make-over. For one thing, Node & Express are now handling the back-end part. I\'ve further incorporated various element generators throughout, resulting in the code optimization by half, while also offering the original functionalities and boosting overall performance.',
     ['HTML', 'CSS', 'Bootstrap', 'JavaScript', 'jQuery', 'Node.js', 'Express'],
     'May 2020',
     'http://www.arielbehar.com'
@@ -262,7 +275,7 @@ let arielBehar = new Project(
 
 //A&M GameHub
 let amGameHub = new Project(
-    1,
+    2,
     'A&M GameHub',
     'am-gamehub.jpg',
     'A desktop based web application to assist my little sisters learn English, European geography and Hebrew.',
@@ -275,7 +288,7 @@ let amGameHub = new Project(
 
 //eSports Marketing Group
 let eSports = new Project(
-    2,
+    3,
     'eSports Marketing Group',
     'esports.jpg',
     'Online marketing firm for eSports competitors. The site is a hub for people to receive representation, guidance and marketing tools on a professional level.',
@@ -287,7 +300,7 @@ let eSports = new Project(
 
 //VX Aviation
 let vxAviation = new Project(
-    3,
+    4,
     'VX Aviation',
     'vx-aviation.jpg',
     'Company site for a Tampa Bay area based personal flight training school aiming for new student recruitement.',
@@ -299,7 +312,7 @@ let vxAviation = new Project(
 
 //Blago-Darya
 let blagoDarya = new Project(
-    4,
+    5,
     'Blago-darya',
     'blago-darya.jpg',
     'Voluntary initiative to help shelter homeless and wounded animals in Bulgaria. The organization gathers funds through direct donations and product sales.',
@@ -312,7 +325,7 @@ let blagoDarya = new Project(
 
 //Travel @ Style
 let travelAtStyle = new Project(
-    5,
+    6,
     'Travel@Style',
     'travel.jpg',
     'eCommerce platform for a New York based store focusing on travel apparel and hand-held steamer irons.',
@@ -324,7 +337,7 @@ let travelAtStyle = new Project(
 
 //T&T Customs
 let ttCustoms = new Project(
-    6,
+    7,
     'T&T Customs',
     'tt.jpg',
     'The site is a front for a business creating custom apparel for school sports teams in the Tampa Bay area.',
@@ -336,7 +349,7 @@ let ttCustoms = new Project(
 
 //The Credit Score Guru
 let creditScoreGuru = new Project(
-    7,
+    8,
     'The Credit Score Guru',
     'guru.jpg',
     'Credit repair site aiming to present viable options for people to fix their credit score and create positive purchasing habits in the future.',
@@ -348,7 +361,7 @@ let creditScoreGuru = new Project(
 
 //HUG Tampa Bay
 let hugTampaBay = new Project(
-    8,
+    9,
     'HUG Tampa Bay',
     'hug.jpg',
     'A Tampa based non-profit organization that strives to connect people with disabilities to social activities and events in the community',
@@ -360,7 +373,7 @@ let hugTampaBay = new Project(
 
 //Body Wrap Spalon
 let bwSpalon = new Project(
-    9,
+    10,
     'Body Wrap Spalon',
     'ispalon.jpg',
     'An Oklahoma based Spa Services website. The site appeals mainly to women, but offers treatments also for men.',
@@ -371,7 +384,7 @@ let bwSpalon = new Project(
 );
 
 //Once the each individual project has been created, it has to be added to the projectsArray
-let projectsArray = [arielBehar, amGameHub, eSports, vxAviation, blagoDarya, travelAtStyle, ttCustoms, creditScoreGuru, hugTampaBay, bwSpalon];
+let projectsArray = [brasileirao, arielBehar, amGameHub, eSports, vxAviation, blagoDarya, travelAtStyle, ttCustoms, creditScoreGuru, hugTampaBay, bwSpalon];
 
 //Creating the projects' respective sections
 projectsArray.forEach(project => {
