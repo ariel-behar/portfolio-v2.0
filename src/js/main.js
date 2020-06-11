@@ -93,6 +93,7 @@ let abilities = [
     ['Node.js', 'yellow', 'node.png'],
     ['Express', 'yellow', 'express.png'],
     ['Heroku', 'yellow', 'heroku.png'],
+    ['Webpack', 'yellow', 'webpack.png'],
     ['Premiere', 'yellow', 'premiere.png'],
     ['MongoDB', 'blue', 'mongodb.png'],
     ['Illustrator', 'blue', 'illustrator-circle.png'],
