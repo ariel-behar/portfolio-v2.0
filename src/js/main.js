@@ -78,6 +78,9 @@ languages.forEach(item => {
 
 //Abilities
 let abilities = [
+    ['React', 'green', 'react.png'],
+    ['Node.js', 'green', 'node.png'],
+    ['Express', 'green', 'express.png'],
     ['HTML', 'green', 'html.png'],
     ['CSS', 'green', 'css.png'],
     ['Sass', 'green', 'sass.png'],
@@ -85,19 +88,16 @@ let abilities = [
     ['MDBootstrap', 'green', 'mdbootstrap.jpg'],
     ['Javascript', 'green', 'js.png'],
     ['jQuery', 'green', 'jquery.png'],
-    ['JSON', 'green', 'json.jpg'],
+    // ['JSON', 'green', 'json.jpg'],
     ['Wordpress', 'green', 'wordpress.png'],
-    ['Gulp.js', 'green', 'gulp.png'],
-    ['Git', 'green', 'git.png'],
+    // ['Gulp.js', 'green', 'gulp.png'],
+    // ['Git', 'green', 'git.png'],
     ['Photoshop', 'green', 'photoshop.png'],
-    ['Node.js', 'yellow', 'node.png'],
-    ['Express', 'yellow', 'express.png'],
-    ['Heroku', 'yellow', 'heroku.png'],
-    ['Webpack', 'yellow', 'webpack.png'],
-    ['Premiere', 'yellow', 'premiere.png'],
-    ['MongoDB', 'blue', 'mongodb.png'],
-    ['Illustrator', 'blue', 'illustrator-circle.png'],
-
+    ['MongoDB', 'yellow', 'mongodb.png'],
+    // ['Heroku', 'yellow', 'heroku.png'],
+    // ['Webpack', 'yellow', 'webpack.png'],
+    ['Premiere', 'blue', 'premiere.png'],
+    // ['Illustrator', 'blue', 'illustrator-circle.png'],
 ];
 
 const abilitiesDiv = document.getElementById('abilities');
@@ -182,7 +182,7 @@ Project.prototype = {
     },
     createSlide: function () {
         let thumbnailTemplate = `<div class="carousel-item">
-                                <a href="${this.domain} target="_blank" class="mx-auto">
+                                <a href="${this.domain}" target="_blank" class="mx-auto">
                                     <img class="img-fluid d-block mx-auto"
                                         src="img/downloaded/slides/${this.projectImage}" alt="Slide Number: ${this.number}">
                                 </a>
