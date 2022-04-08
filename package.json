@@ -3,6 +3,9 @@
     "version": "2.0.0",
     "description": "An updated and upgraded version of my portfolio with integration of Node and Express",
     "main": "index.js",
+    "engines": {
+        "node": "14.x"
+    },
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon -e js,hbs --ignore public"
